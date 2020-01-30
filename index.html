@@ -69,7 +69,7 @@
     </div>
     <div class="col-sm-9">
         <div id="intro">
-            <div class="page-header"><h1>Introduction</h1></div>
+            <div class="page-header"><h1 id="introduction">    Introduction <small><a href="#introduction">¶</a></small></h1> </div>
 <p>Git hook scripts are useful for identifying simple issues before submission to
 code review.  We run our hooks on every commit to automatically point out
 issues in code such as missing semicolons, trailing whitespace, and debug
@@ -96,7 +96,7 @@ and building node to run eslint without root.</p>
 
         </div>
         <div id="install">
-            <div class="page-header"><h1>Installation</h1></div>
+            <div class="page-header"><h1 id="installation">    Installation <small><a href="#installation">¶</a></small></h1> </div>
 <p>Before you can run hooks, you need to have the pre-commit package manager
 installed.</p>
 <p>Using pip:</p>
@@ -123,8 +123,8 @@ requirements-dev.txt):</p>
 <li>follow the <a href="#install">install</a> instructions above</li>
 <li><code>pre-commit --version</code> should show you what version you're using</li>
 </ul>
-<div class="highlight console"><pre><span></span><span class="gp">$</span> pre-commit --version
-<span class="go">pre-commit 1.18.1</span>
+<div class="highlight pre-commit"><pre><span></span>$ pre-commit --version
+pre-commit 2.0.1
 </pre></div>
 <h3 id="2-add-a-pre-commit-configuration">    2. Add a pre-commit configuration <small><a href="#2-add-a-pre-commit-configuration">¶</a></small></h3> <ul>
 <li>create a file named <code>.pre-commit-config.yaml</code></li>
@@ -173,7 +173,8 @@ git hooks)</li>
 Check Yaml...............................................................<span class=" -Color -Color-BGGreen">Passed</span>
 Fix End of Files.........................................................<span class=" -Color -Color-BGGreen">Passed</span>
 Trim Trailing Whitespace.................................................<span class=" -Color -Color-BGRed">Failed</span>
-hookid: trailing-whitespace
+<span class=" -Color -Color-Faint">- hook id: trailing-whitespace</span>
+<span class=" -Color -Color-Faint">- exit code: 1</span>
 
 Files were modified by this hook. Additional output:
 
@@ -189,9 +190,7 @@ black....................................................................<span c
         </div>
 
         <div id="plugins">
-            <div class="page-header">
-                <h1>Adding pre-commit plugins to your project</h1>
-            </div>
+            <div class="page-header"><h1 id="adding-pre-commit-plugins-to-your-project">    Adding pre-commit plugins to your project <small><a href="#adding-pre-commit-plugins-to-your-project">¶</a></small></h1> </div>
 <p>Once you have pre-commit installed, adding pre-commit plugins to your project
 is done with the <code>.pre-commit-config.yaml</code> configuration file.</p>
 <p>Add a file called <code>.pre-commit-config.yaml</code> to the root of your project. The
@@ -221,6 +220,8 @@ hooks that do not set <code>stages</code>.</p>
 <div class="highlight yaml"><pre><span></span><span class="nt">default_stages</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">commit</span><span class="p p-Indicator">,</span> <span class="nv">push</span><span class="p p-Indicator">]</span>
 </pre></div>
 <p><em>new in 1.14.0</em></p>
+</td></tr><tr><td><p><code>files</code></p>
+</td><td><p>(optional: default <code>''</code>) global file include pattern.  <em>new in 1.21.0</em>.</p>
 </td></tr><tr><td><p><code>exclude</code></p>
 </td><td><p>(optional: default <code>^$</code>) global file exclude pattern.  <em>new in 1.1.0</em>.</p>
 </td></tr><tr><td><p><code>fail_fast</code></p>
@@ -270,29 +271,28 @@ hook.  See <a href="#overriding-language-version">Overriding Language Version</a
 </td><td><p>(optional) file exclude pattern.</p>
 </td></tr><tr><td><p><code>types</code></p>
 </td><td><p>(optional) override the default file types to run on.  See
-<a href="#filtering-files-with-types">Filtering files with types</a>.
-<em>new in 0.15.0</em>.</p>
+<a href="#filtering-files-with-types">Filtering files with types</a>.</p>
 </td></tr><tr><td><p><code>exclude_types</code></p>
-</td><td><p>(optional) file types to exclude.  <em>new in 0.15.0</em>.</p>
+</td><td><p>(optional) file types to exclude.</p>
 </td></tr><tr><td><p><code>args</code></p>
 </td><td><p>(optional) list of additional parameters to pass to the hook.</p>
 </td></tr><tr><td><p><code>stages</code></p>
-</td><td><p>(optional) confines the hook to the <code>commit</code>, <code>push</code>, <code>prepare-commit-msg</code>,
-<code>commit-msg</code>, or <code>manual</code> stage.  See
+</td><td><p>(optional) confines the hook to the <code>commit</code>, <code>merge-commit</code>, <code>push</code>,
+<code>prepare-commit-msg</code>, <code>commit-msg</code>, or <code>manual</code> stage.  See
 <a href="#confining-hooks-to-run-at-certain-stages">Confining hooks to run at certain stages</a>.</p>
 </td></tr><tr><td><p><code>additional_dependencies</code></p>
 </td><td><p>(optional) a list of dependencies that will be installed in the
 environment where this hook gets run.  One useful application is to
-install plugins for hooks such as <code>eslint</code>.  <em>new in 0.6.6</em>.</p>
+install plugins for hooks such as <code>eslint</code>.</p>
 </td></tr><tr><td><p><code>always_run</code></p>
 </td><td><p>(optional) if <code>true</code>, this hook will run even if there are no matching
-files.  <em>new in 0.7.2</em>.</p>
+files.</p>
 </td></tr><tr><td><p><code>verbose</code></p>
 </td><td><p>(optional) if <code>true</code>, forces the output of the hook to be printed even when
 the hook passes.  <em>new in 1.6.0</em>.</p>
 </td></tr><tr><td><p><code>log_file</code></p>
 </td><td><p>(optional) if present, the hook output will additionally be written
-to a file.  <em>new in 0.14.0</em>.</p>
+to a file.</p>
 </td></tr></tbody></table><p>One example of a complete configuration:</p>
 <div class="highlight yaml"><pre><span></span><span class="nt">repos</span><span class="p">:</span>
 <span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
@@ -303,13 +303,13 @@ to a file.  <em>new in 0.14.0</em>.</p>
 <p>This configuration says to download the pre-commit-hooks project and run its
 trailing-whitespace hook.</p>
 <h2 id="updating-hooks-automatically">    Updating hooks automatically <small><a href="#updating-hooks-automatically">¶</a></small></h2> <p>You can update your hooks to the latest version automatically by running
-<code>pre-commit autoupdate</code>.  This will bring the hooks to the latest tag on the
-master branch.</p>
+<a href="#pre-commit-autoupdate"><code>pre-commit autoupdate</code></a>.  By default, this will
+bring the hooks to the latest tag on the master branch.</p>
 
         </div>
 
         <div id="usage">
-            <div class="page-header"><h1>Usage</h1></div>
+            <div class="page-header"><h1 id="usage">    Usage <small><a href="#usage">¶</a></small></h1> </div>
 <p>Run <code>pre-commit install</code> to install pre-commit into your git hooks. pre-commit
 will now run on every commit. Every time you clone a project using pre-commit
 running <code>pre-commit install</code> should always be the first thing you do.</p>
@@ -342,14 +342,13 @@ changelog filenames..................................(no files to check)<span cl
         </div>
 
         <div id="new-hooks">
-            <div class="page-header"><h1>Creating new hooks</h1></div>
+            <div class="page-header"><h1 id="creating-new-hooks">    Creating new hooks <small><a href="#creating-new-hooks">¶</a></small></h1> </div>
 <p>pre-commit currently supports hooks written in
 <a href="#supported-languages">many languages</a>. As long as your git repo is an
 installable package (gem, npm, pypi, etc.) or exposes an executable, it can be
 used with pre-commit. Each git repo can support as many languages/hooks as you
 want.</p>
-<p>The hook must exit nonzero on failure or modify files in the working directory
-<em>(since 0.6.3)</em>.</p>
+<p>The hook must exit nonzero on failure or modify files in the working directory.</p>
 <p>A git repo containing pre-commit plugins must contain a .pre-commit-hooks.yaml
 file that tells pre-commit:</p>
 <table class="table table-bordered"><tbody><tr><td><p><code>id</code></p>
@@ -362,26 +361,23 @@ arguments that will not be overridden such as <code>entry: autopep8 -i</code>.</
 </td></tr><tr><td><p><code>language</code></p>
 </td><td><p>the language of the hook - tells pre-commit how to install the hook.</p>
 </td></tr><tr><td><p><code>files</code></p>
-</td><td><p>(optional: default <code>''</code>) the pattern of files to run on.
-<em>new in 0.15.0</em>: now optional.</p>
+</td><td><p>(optional: default <code>''</code>) the pattern of files to run on.</p>
 </td></tr><tr><td><p><code>exclude</code></p>
 </td><td><p>(optional: default <code>^$</code>)  exclude files that were matched by <code>files</code>.</p>
 </td></tr><tr><td><p><code>types</code></p>
 </td><td><p>(optional: default <code>[file]</code>)  list of file types to run on.  See
-<a href="#filtering-files-with-types">Filtering files with types</a>.
-<em>new in 0.15.0</em>.</p>
+<a href="#filtering-files-with-types">Filtering files with types</a>.</p>
 </td></tr><tr><td><p><code>exclude_types</code></p>
-</td><td><p>(optional: default <code>[]</code>)  exclude files that were matched by <code>types</code>.
-<em>new in 0.15.0</em>.</p>
+</td><td><p>(optional: default <code>[]</code>)  exclude files that were matched by <code>types</code>.</p>
 </td></tr><tr><td><p><code>always_run</code></p>
 </td><td><p>(optional: default <code>false</code>) if <code>true</code> this hook will run even if there
-are no matching files. <em>new in 0.7.2</em>.</p>
+are no matching files.</p>
 </td></tr><tr><td><p><code>verbose</code></p>
 </td><td><p>(optional) if <code>true</code>, forces the output of the hook to be printed even when
 the hook passes.  <em>new in 1.6.0</em>.</p>
 </td></tr><tr><td><p><code>pass_filenames</code></p>
-</td><td><p>(optional: default <code>true</code>) if <code>true</code> this hook must take filenames as
-positional arguments. <em>new in 0.14.0</em>.</p>
+</td><td><p>(optional: default <code>true</code>) if <code>false</code> no arguments will be passed to
+the hook.</p>
 </td></tr><tr><td><p><code>require_serial</code></p>
 </td><td><p>(optional: default <code>false</code>) if <code>true</code> this hook will execute using a
 single process instead of in parallel. <em>new in 1.13.0</em>.</p>
@@ -393,7 +389,7 @@ purposes only.</p>
 <a href="#overriding-language-version">Overriding language version</a>.</p>
 </td></tr><tr><td><p><code>minimum_pre_commit_version</code></p>
 </td><td><p>(optional: default <code>'0'</code>) allows one to indicate a minimum
-compatible pre-commit version. <em>new in 0.6.7</em>.</p>
+compatible pre-commit version.</p>
 </td></tr><tr><td><p><code>args</code></p>
 </td><td><p>(optional: default <code>[]</code>) list of additional parameters to pass to the hook.</p>
 </td></tr></tbody></table><p>For example:</p>
@@ -404,9 +400,6 @@ compatible pre-commit version. <em>new in 0.6.7</em>.</p>
     <span class="nt">language</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
     <span class="nt">types</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">text</span><span class="p p-Indicator">]</span>
 </pre></div>
-<p><em>new in 0.12.0</em>: Prior to 0.12.0 the file was <code>hooks.yaml</code>
-(now <code>.pre-commit-hooks.yaml</code>).  For backwards compatibility it is suggested
-to provide both files or suggest users use <code>pre-commit&gt;=0.12.0</code>.</p>
 <h2 id="developing-hooks-interactively">    Developing hooks interactively <small><a href="#developing-hooks-interactively">¶</a></small></h2> <p>Since the <code>repo</code> property of <code>.pre-commit-config.yaml</code> can refer to anything
 that <code>git clone ...</code> understands, it's often useful to point it at a local
 directory while developing hooks.</p>
@@ -434,12 +427,14 @@ repos:
     -   id: foo
 ===============================================================================
 [INFO] Initializing environment for ../hook-repo.
-[foo] Foo................................................................<span class=" -Color -Color-BGGreen">Passed</span>
-hookid: foo
+Foo......................................................................<span class=" -Color -Color-BGGreen">Passed</span>
+<span class=" -Color -Color-Faint">- hook id: foo</span>
+<span class=" -Color -Color-Faint">- duration: 0.02s</span>
 
 Hello from foo hook!
 </pre></div>
 <h2 id="supported-languages">    Supported languages <small><a href="#supported-languages">¶</a></small></h2> <ul>
+<li><a href="#conda">conda</a></li>
 <li><a href="#docker">docker</a></li>
 <li><a href="#docker_image">docker_image</a></li>
 <li><a href="#fail">fail</a></li>
@@ -450,13 +445,20 @@ Hello from foo hook!
 <li><a href="#ruby">ruby</a></li>
 <li><a href="#rust">rust</a></li>
 <li><a href="#swift">swift</a></li>
-<li><a href="#pcre">pcre</a></li>
 <li><a href="#pygrep">pygrep</a></li>
 <li><a href="#script">script</a></li>
 <li><a href="#system">system</a></li>
 </ul>
-<h3 id="docker">    docker <small><a href="#docker">¶</a></small></h3> <p><em>new in 0.10.0</em></p>
-<p>The hook repository must have a <code>Dockerfile</code>.  It will be installed via
+<h3 id="conda">    conda <small><a href="#conda">¶</a></small></h3> <p><em>new in 1.21.0</em></p>
+<p>The hook repository must contain an <code>environment.yml</code> file which will be used
+via <code>conda env create --file environment.yml ...</code> to create the environment.</p>
+<p>The <code>conda</code> language also supports <code>additional_dependencies</code> and will pass any
+of the values directly into <code>conda install</code>.  This language can therefore be
+used with <a href="#repository-local-hooks">local</a> hooks.</p>
+<p><strong>Support:</strong> <code>conda</code> hooks work as long as there is a system-installed <code>conda</code>
+binary (such as <a href="https://docs.conda.io/en/latest/miniconda.html"><code>miniconda</code></a>).
+It has been tested on linux, macOS, and windows.</p>
+<h3 id="docker">    docker <small><a href="#docker">¶</a></small></h3> <p>The hook repository must have a <code>Dockerfile</code>.  It will be installed via
 <code>docker build .</code>.</p>
 <p>Running Docker hooks requires a running Docker engine on your host.  For
 configuring Docker hooks, your <code>entry</code> should correspond to an executable
@@ -464,13 +466,14 @@ inside the Docker container, and will be used to override the default container
 entrypoint. Your Docker <code>CMD</code> will not run when pre-commit passes a file list
 as arguments to the run container command. Docker allows you to use any
 language that's not supported by pre-commit as a builtin.</p>
+<p>pre-commit will automatically mount the repository source as a volume using
+<code>-v $PWD:/src:rw,Z' and set the working directory using</code>--workdir /src`.</p>
 <p><strong>Support:</strong> docker hooks are known to work on any system which has a working
 <code>docker</code> executable.  It has been tested on linux and macOS.  Hooks that are
 run via <code>boot2docker</code> are known to be unable to make modifications to files.</p>
 <p>See <a href="https://github.com/pre-commit/pre-commit-docker-flake8">this repository</a>
 for an example Docker-based hook.</p>
-<h3 id="docker_image">    docker_image <small><a href="#docker_image">¶</a></small></h3> <p><em>new in 0.18.0</em></p>
-<p>A more lightweight approach to <code>docker</code> hooks.  The <code>docker_image</code>
+<h3 id="docker_image">    docker_image <small><a href="#docker_image">¶</a></small></h3> <p>A more lightweight approach to <code>docker</code> hooks.  The <code>docker_image</code>
 "language" uses existing docker images to provide hook executables.</p>
 <p><code>docker_image</code> hooks can be conveniently configured as <a href="#repository-local-hooks">local</a>
 hooks.</p>
@@ -508,8 +511,7 @@ being added to the <code>changelog</code> directory:</p>
         <span class="nt">language</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fail</span>
         <span class="nt">files</span><span class="p">:</span> <span class="s">&#39;changelog/.*(?&lt;!\.rst)$&#39;</span>
 </pre></div>
-<h3 id="golang">    golang <small><a href="#golang">¶</a></small></h3> <p><em>new in 0.12.0</em></p>
-<p>The hook repository must contain go source code.  It will be installed via
+<h3 id="golang">    golang <small><a href="#golang">¶</a></small></h3> <p>The hook repository must contain go source code.  It will be installed via
 <code>go get ./...</code>.  pre-commit will create an isolated <code>GOPATH</code> for each hook and
 the <code>entry</code> should match an executable which will get installed into the
 <code>GOPATH</code>'s <code>bin</code> directory.</p>
@@ -522,9 +524,10 @@ match the <code>entry</code> – usually through <code>bin</code> in package.jso
 been tested on linux and macOS and <em>may</em> work under cygwin.</p>
 <p><em>new in 1.5.0</em>: windows is now supported for node hooks.  Currently python3
 only due to <a href="https://bugs.python.org/issue32539">a bug in cpython</a>.</p>
-<h3 id="python">    python <small><a href="#python">¶</a></small></h3> <p>The hook repository must have a <code>setup.py</code>.  It will be installed via
-<code>pip install .</code>.  The installed package will provide an executable that will
-match the <code>entry</code> – usually through <code>console_scripts</code> or <code>scripts</code> in setup.py.</p>
+<h3 id="python">    python <small><a href="#python">¶</a></small></h3> <p>The hook repository must be installable via <code>pip install .</code> (usually by either
+<code>setup.py</code> or <code>pyproject.toml</code>).  The installed package will provide an
+executable that will match the <code>entry</code> – usually through <code>console_scripts</code> or
+<code>scripts</code> in setup.py.</p>
 <p><strong>Support:</strong> python hooks work without any system-level dependencies.  It
 has been tested on linux, macOS, windows, and cygwin.</p>
 <h3 id="python_venv">    python_venv <small><a href="#python_venv">¶</a></small></h3> <p><em>new in 1.9.0</em></p>
@@ -558,22 +561,11 @@ build <em>your</em> hook repo), or the special syntax
 with binaries made available for use by hooks).</p>
 <p><strong>Support:</strong> Rust hooks currently require a pre-existing Rust installation.  It
 has been tested on linux, Windows, and macOS.</p>
-<h3 id="swift">    swift <small><a href="#swift">¶</a></small></h3> <p><em>new in 0.11.0</em></p>
-<p>The hook repository must have a <code>Package.swift</code>.  It will be installed via
+<h3 id="swift">    swift <small><a href="#swift">¶</a></small></h3> <p>The hook repository must have a <code>Package.swift</code>.  It will be installed via
 <code>swift build -c release</code>.  The <code>entry</code> should match an executable created by
 building the repository.</p>
 <p><strong>Support:</strong> swift hooks are known to work on any system which has swift
 installed.  It has been tested on linux and macOS.</p>
-<h3 id="pcre">    pcre <small><a href="#pcre">¶</a></small></h3> <p><em><strong>deprecated</strong></em>: the pcre language will be removed in a later version.  Use
-<a href="#pygrep">pygrep</a> hooks instead (usually a drop-in replacement).</p>
-<p>"Perl Compatible Regular Expressions" – pcre hooks are a quick way to write a
-simple hook which prevents commits by file matching.  Specify the regex as the
-<code>entry</code>.</p>
-<p>macos does not ship with a functioning <code>grep -P</code> so you'll need
-<code>brew install grep</code> for pcre hooks to function.</p>
-<p><strong>Support:</strong> pcre hooks work on any system which has a functioning
-<code>grep -P</code> (or in the case of macOS: <code>ggrep -P</code>).  It has been tested on linux,
-macOS, windows, and cygwin.</p>
 <h3 id="pygrep">    pygrep <small><a href="#pygrep">¶</a></small></h3> <p><em>new in 1.2.0</em></p>
 <p>A cross-platform python implementation of <code>grep</code> – pygrep hooks are a quick
 way to write a simple hook which prevents commits by file matching.  Specify
@@ -598,7 +590,7 @@ needs additional dependencies the consumer must install them manually.</p>
         </div>
 
         <div id="cli">
-            <div class="page-header"><h1>Command line interface</h1></div>
+            <div class="page-header"><h1 id="command-line-interface">    Command line interface <small><a href="#command-line-interface">¶</a></small></h1> </div>
 
 <p>All pre-commit commands take the following options:</p>
 <ul>
@@ -613,9 +605,46 @@ Defaults to <code>auto</code>.  <em>new in 1.18.0</em>: can be overridden by usi
 <ul>
 <li><code>--bleeding-edge</code>: update to the bleeding edge of <code>master</code> instead of the
 latest tagged version (the default behaviour).</li>
+<li><code>--freeze</code>: <em>new in 1.21.0</em>): Store "frozen" hashes in <code>rev</code> instead of tag
+names.</li>
 <li><code>--repo REPO</code>: <em>new in 1.4.1</em>: Only update this repository. <em>new in 1.7.0</em>:
 This option may be specified multiple times.</li>
 </ul>
+<p>Here are some sample invocations using this <code>.pre-commit-config.yaml</code>:</p>
+<div class="highlight yaml"><pre><span></span><span class="nt">repos</span><span class="p">:</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v2.1.0</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/asottile/pyupgrade</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1.25.0</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pyupgrade</span>
+        <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">--py36-plus</span><span class="p p-Indicator">]</span>
+</pre></div>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> : default: update to latest tag on default branch
+<span class="gp">$</span> pre-commit autoupdate  <span class="c1"># by default: pick tags</span>
+<span class="go">Updating https://github.com/pre-commit/pre-commit-hooks ... updating v2.1.0 -&gt; v2.4.0.</span>
+<span class="go">Updating https://github.com/asottile/pyupgrade ... updating v1.25.0 -&gt; v1.25.2.</span>
+<span class="gp">$</span> grep rev: .pre-commit-config.yaml
+<span class="go">    rev: v2.4.0</span>
+<span class="go">    rev: v1.25.2</span>
+</pre></div>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> : update a specific repository to the latest revision of the default branch
+<span class="gp">$</span> pre-commit autoupdate --bleeding-edge --repo https://github.com/pre-commit/pre-commit-hooks
+<span class="go">Updating https://github.com/pre-commit/pre-commit-hooks ... updating v2.1.0 -&gt; 5df1a4bf6f04a1ed3a643167b38d502575e29aef.</span>
+<span class="gp">$</span> grep rev: .pre-commit-config.yaml
+<span class="go">    rev: 5df1a4bf6f04a1ed3a643167b38d502575e29aef</span>
+<span class="go">    rev: v1.25.0</span>
+</pre></div>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> : update to frozen versions
+<span class="gp">$</span> pre-commit autoupdate --freeze
+<span class="go">Updating https://github.com/pre-commit/pre-commit-hooks ... updating v2.1.0 -&gt; v2.4.0 (frozen).</span>
+<span class="go">Updating https://github.com/asottile/pyupgrade ... updating v1.25.0 -&gt; v1.25.2 (frozen).</span>
+<span class="gp">$</span> grep rev: .pre-commit-config.yaml
+<span class="go">    rev: 0161422b4e09b47536ea13f49e786eb3616fe0d7  # frozen: v2.4.0</span>
+<span class="go">    rev: 34a269fd7650d264e4de7603157c10d0a9bb8211  # frozen: v1.25.2</span>
+</pre></div>
 <h2 id="pre-commit-clean">    pre-commit clean [options] <a href="#pre-commit-clean"></a> <small><a href="#pre-commit-clean">¶</a></small></h2> <p>Clean out cached pre-commit files.</p>
 <p>Options: (no additional options)</p>
 <h2 id="pre-commit-gc">    pre-commit gc [options] <a href="#pre-commit-gc"></a> <small><a href="#pre-commit-gc">¶</a></small></h2> <p><em>new in 1.14.0</em></p>
@@ -629,8 +658,8 @@ the cache directory.</p>
 <code>git config init.templateDir</code>.</p>
 <p>Options:</p>
 <ul>
-<li><code>-t {pre-commit,pre-push,prepare-commit-msg,commit-msg}</code>,
-<code>--hook-type {pre-commit,pre-push,prepare-commit-msg,commit-msg}</code>:
+<li><code>-t {pre-commit,pre-merge-commit,pre-push,prepare-commit-msg,commit-msg}</code>,
+<code>--hook-type {pre-commit,pre-merge-commit,pre-push,prepare-commit-msg,commit-msg}</code>:
 which hook type to install.</li>
 </ul>
 <p>Some example useful invocations:</p>
@@ -647,8 +676,8 @@ script.</li>
 <li><code>--install-hooks</code>: Also install environments for all available hooks now
 (rather than when they are first executed). See <a href="#pre-commit-install-hooks"><code>pre-commit
 install-hooks</code></a>.</li>
-<li><code>-t {pre-commit,pre-push,prepare-commit-msg,commit-msg}</code>,
-<code>--hook-type {pre-commit,pre-push,prepare-commit-msg,commit-msg}</code>:
+<li><code>-t {pre-commit,pre-merge-commit,pre-push,prepare-commit-msg,commit-msg}</code>,
+<code>--hook-type {pre-commit,pre-merge-commit,pre-push,prepare-commit-msg,commit-msg}</code>:
 Specify which hook type to install.</li>
 <li><code>--allow-missing-config</code>: Hook scripts will permit a missing configuration
 file.</li>
@@ -680,8 +709,7 @@ the hook environments in one command, use <code>pre-commit install --install hoo
 <li><code>--files [FILES [FILES ...]]</code>: specific filenames to run hooks on.</li>
 <li><code>--source SOURCE</code> + <code>--origin ORIGIN</code>: run against the files changed between
 <code>SOURCE...ORIGIN</code> in git.</li>
-<li><code>--show-diff-on-failure</code>: <em>new in 0.13.4</em>: when hooks fail, run <code>git diff</code>
-directly afterward.</li>
+<li><code>--show-diff-on-failure</code>: when hooks fail, run <code>git diff</code> directly afterward.</li>
 <li><code>-v</code>, <code>--verbose</code>: produce hook output independent of success.  Include hook
 ids in output.</li>
 </ul>
@@ -728,20 +756,20 @@ which are also supported by <code>pre-commit try-repo</code>.</li>
 <h2 id="pre-commit-uninstall">    pre-commit uninstall [options] <a href="#pre-commit-uninstall"></a> <small><a href="#pre-commit-uninstall">¶</a></small></h2> <p>Uninstall the pre-commit script.</p>
 <p>Options:</p>
 <ul>
-<li><code>-t {pre-commit,pre-push,prepare-commit-msg,commit-msg}</code>,
-<code>--hook-type {pre-commit,pre-push,prepare-commit-msg,commit-msg}</code>: which hook
+<li><code>-t {pre-commit,pre-merge-commit,pre-push,prepare-commit-msg,commit-msg}</code>,
+<code>--hook-type {pre-commit,pre-merge-commit,pre-push,prepare-commit-msg,commit-msg}</code>: which hook
 type to uninstall.</li>
 </ul>
 
         </div>
 
         <div id="advanced">
-            <div class="page-header"><h1>Advanced features</h1></div>
+            <div class="page-header"><h1 id="advanced-features">    Advanced features <small><a href="#advanced-features">¶</a></small></h1> </div>
 
 <h2 id="running-in-migration-mode">    Running in migration mode <small><a href="#running-in-migration-mode">¶</a></small></h2> <p>By default, if you have existing hooks <code>pre-commit install</code> will install in a
 migration mode which runs both your existing hooks and hooks for pre-commit.
-To disable this behavior, simply pass <code>-f</code> / <code>--overwrite</code> to the <code>install</code>
-command. If you decide not to use pre-commit, <code>pre-commit uninstall</code> will
+To disable this behavior, pass <code>-f</code> / <code>--overwrite</code> to the <code>install</code> command.
+If you decide not to use pre-commit, <code>pre-commit uninstall</code> will
 restore your hooks to the state prior to installation.</p>
 <h2 id="temporarily-disabling-hooks">    Temporarily disabling hooks <small><a href="#temporarily-disabling-hooks">¶</a></small></h2> <p>Not all hooks are perfect so sometimes you may need to skip execution of one
 or more hooks. pre-commit solves this by querying a <code>SKIP</code> environment
@@ -764,16 +792,41 @@ caught.</p>
 manually edited during conflict resolution.  This also includes files which
 were automatically merged by git.  Git isn't perfect and this can often catch
 implicit conflicts (such as with removed python imports).</p>
-<h2 id="pre-commit-during-push">    pre-commit during push <small><a href="#pre-commit-during-push">¶</a></small></h2> <p><em>new in 0.3.5</em>: pre-commit can be used to manage <code>pre-push</code> hooks.  Simply
-<code>pre-commit install --hook-type pre-push</code>.</p>
-<h2 id="pre-commit-for-commit-messages">    pre-commit for commit messages <small><a href="#pre-commit-for-commit-messages">¶</a></small></h2> <p><em>new in 0.15.4</em>: pre-commit can be used to manage <code>commit-msg</code> hooks.  Simply
-<code>pre-commit install --hook-type commit-msg</code>.</p>
+<h2 id="pre-commit-during-clean-merges">    pre-commit during clean merges <small><a href="#pre-commit-during-clean-merges">¶</a></small></h2> <p><em>new in 1.21.0</em> pre-commit can be used to manage <a href="https://git-scm.com/docs/githooks#_pre_merge_commit">pre-merge-commit</a> hooks.</p>
+<p>To use <code>pre-merge-commit</code> hooks with pre-commit, run:</p>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> pre-commit install --hook-type pre-merge-commit
+<span class="go">pre-commit installed at .git/hooks/pre-merge-commit</span>
+</pre></div>
+<p>The hook fires after a merge succeeds but before the merge commit is created.</p>
+<p>Note that you need to be using at least git 2.24 which added support for the
+pre-merge-commit hook.</p>
+<h2 id="pre-commit-during-push">    pre-commit during push <small><a href="#pre-commit-during-push">¶</a></small></h2> <p>To use <code>pre-push</code> hooks with pre-commit, run:</p>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> pre-commit install --hook-type pre-push
+<span class="go">pre-commit installed at .git/hooks/pre-push</span>
+</pre></div>
+<p>During a push, pre-commit will export the following environment variables:</p>
+<ul>
+<li><code>PRE_COMMIT_SOURCE</code>: the remote revision that is being pushed to.</li>
+<li><code>PRE_COMMIT_ORIGIN</code>: the local revision that is being pushed to the remote.</li>
+<li><code>PRE_COMMIT_REMOTE_NAME</code>: <em>new in 2.0.0</em> which remote is being pushed to
+(for example <code>origin</code>)</li>
+<li><code>PRE_COMMIT_REMOTE_URL</code>: <em>new in 2.0.0</em> the url of the remote that is being
+pushed to (for example <code>git@github.com:pre-commit/pre-commit</code>.</li>
+</ul>
+<h2 id="pre-commit-for-commit-messages">    pre-commit for commit messages <small><a href="#pre-commit-for-commit-messages">¶</a></small></h2> <p>pre-commit can be used to manage <a href="https://git-scm.com/docs/githooks#_commit_msg">commit-msg</a> hooks.</p>
+<p>To use <code>commit-msg</code> hooks with pre-commit, run:</p>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> pre-commit install --hook-type commit-msg
+<span class="go">pre-commit installed at .git/hooks/commit-msg</span>
+</pre></div>
 <p><code>commit-msg</code> hooks can be configured by setting <code>stages: [commit-msg]</code>.
 <code>commit-msg</code> hooks will be passed a single filename -- this file contains the
 current contents of the commit message which can be validated.  If a hook
 exits nonzero, the commit will be aborted.</p>
-<p><em>new in 1.16.0</em>: pre-commit can be used to manage <code>prepare-commit-msg</code> hooks.
-Simply <code>pre-commit install --hook-type prepare-commit-msg</code>.</p>
+<p><em>new in 1.16.0</em>: pre-commit can be used to manage <a href="https://git-scm.com/docs/githooks#_prepare_commit_msg">prepare-commit-msg</a> hooks.</p>
+<p>To use <code>prepare-commit-msg</code> hooks with pre-commit run:</p>
+<div class="highlight console"><pre><span></span><span class="gp">$</span> pre-commit install --hook-type prepare-commit-msg<span class="sb">`</span>
+<span class="go">pre-commit installed at .git/hooks/prepare-commit-msg</span>
+</pre></div>
 <p><code>prepare-commit-msg</code> hooks can be used to create dynamic templates for commit
 messages. <code>prepare-commit-msg</code> hooks can be configured by setting
 <code>stages: [prepare-commit-msg]</code>. <code>prepare-commit-msg</code> hooks will be passed a
@@ -791,8 +844,8 @@ to run at the stage defined through that option. for instance,
 to run at the <code>push</code> stage.</p>
 <p>Hooks can however be confined to a stage by setting the <code>stages</code> property in
 your <code>.pre-commit-config.yaml</code>.  The <code>stages</code> property is an array and can
-contain any of <code>commit</code>, <code>push</code>, <code>prepare-commit-msg</code>, <code>commit-msg</code> and
-<code>manual</code>.</p>
+contain any of <code>commit</code>, <code>merge-commit</code>, <code>push</code>, <code>prepare-commit-msg</code>,
+<code>commit-msg</code> and <code>manual</code>.</p>
 <p>If you do not want to have hooks installed by default on the stage passed
 during a <code>pre-commit install --hook-type ...</code>, please set the <code>default_stages</code>
 top level configuration property to the desired stages, also as an array.</p>
@@ -836,9 +889,8 @@ repository (such as your app's virtualenv for pylint).</li>
 </ul>
 <p>You can configure repository-local hooks by specifying the <code>repo</code> as the
 sentinel <code>local</code>.</p>
-<p><em>new in 0.13.0</em>: local hooks can use any language which supports
-<code>additional_dependencies</code> or <code>docker_image</code> / <code>fail</code> / <code>pcre</code> / <code>pygrep</code> /
-<code>script</code> / <code>system</code>.
+<p>local hooks can use any language which supports <code>additional_dependencies</code> or
+<code>docker_image</code> / <code>fail</code> / <code>pygrep</code> / <code>script</code> / <code>system</code>.
 This enables you to install things which previously would require a trivial
 mirror repository.</p>
 <p>A <code>local</code> hook must define <code>id</code>, <code>name</code>, <code>language</code>, <code>entry</code>, and <code>files</code> /
@@ -848,7 +900,7 @@ mirror repository.</p>
     <span class="nt">hooks</span><span class="p">:</span>
     <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pylint</span>
         <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pylint</span>
-        <span class="nt">entry</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python -m pylint.__main__</span>
+        <span class="nt">entry</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pylint</span>
         <span class="nt">language</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">system</span>
         <span class="nt">types</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">python</span><span class="p p-Indicator">]</span>
     <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">check-x</span>
@@ -914,8 +966,7 @@ Debug Statements (Python)............................(no files to check)<span cl
 <span class="go">`.pre-commit-config.yaml` config file not found. Skipping `pre-commit`.</span>
 <span class="go">[master (root-commit) d1b39c1] Initial commit</span>
 </pre></div>
-<h2 id="filtering-files-with-types">    Filtering files with types <small><a href="#filtering-files-with-types">¶</a></small></h2> <p><em>new in 0.15.0</em></p>
-<p>Filtering with <code>types</code> provides several advantages over traditional filtering
+<h2 id="filtering-files-with-types">    Filtering files with types <small><a href="#filtering-files-with-types">¶</a></small></h2> <p>Filtering with <code>types</code> provides several advantages over traditional filtering
 with <code>files</code>.</p>
 <ul>
 <li>no error-prone regular expressions</li>
@@ -954,6 +1005,14 @@ chosen as it is a small portable pure python library.</p>
     <span class="nt">types</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">file</span><span class="p p-Indicator">,</span> <span class="nv">python</span><span class="p p-Indicator">]</span>
 </pre></div>
 <p>will match a file <code>foo/1.py</code> but will not match <code>setup.py</code>.</p>
+<p>If you want to match a file path that isn't included in a <code>type</code> when using an
+existing hook you'll need to revert back to <code>files</code> only matching by overriding
+the <code>types</code> setting.  Here's an example of using <code>check-json</code> against non-json
+files:</p>
+<div class="highlight yaml"><pre><span></span>    <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">check-json</span>
+        <span class="nt">types</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">file</span><span class="p p-Indicator">]</span>  <span class="c1"># override `types: [json]`</span>
+        <span class="nt">files</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">\.(json|myext)$</span>
+</pre></div>
 <p>Files can also be matched by shebang.  With <code>types: python</code>, an <code>exe</code> starting
 with <code>#!/usr/bin/env python3</code> will also be matched.</p>
 <p>As with <code>files</code> and <code>exclude</code>, you can also exclude types if necessary using
@@ -980,8 +1039,8 @@ the <code>(?x)</code> regex flag.</p>
 </pre></div>
 <h2 id="overriding-language-version">    Overriding language version <small><a href="#overriding-language-version">¶</a></small></h2> <p>Sometimes you only want to run the hooks on a specific version of the
 language. For each language, they default to using the system installed
-language (So for example if I’m running <code>python2.7</code> and a hook specifies
-<code>python</code>, pre-commit will run the hook using <code>python2.7</code>). Sometimes you
+language (So for example if I’m running <code>python3.7</code> and a hook specifies
+<code>python</code>, pre-commit will run the hook using <code>python3.7</code>). Sometimes you
 don’t want the default system installed version so you can override this on a
 per-hook basis by setting the <code>language_version</code>.</p>
 <div class="highlight yaml"><pre><span></span><span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/mirrors-scss-lint</span>
@@ -1018,7 +1077,52 @@ control the default versions across all hooks of a language.</p>
 instance, adding <code>pre-commit run --all-files</code> as a CI step will ensure
 everything stays in tip-top shape.  To check only files which have changed,
 which may be faster, use something like
-<code>git diff-tree --no-commit-id --name-only -r $REVISION | xargs pre-commit run --files</code>.</p>
+<code>pre-commit run --origin HEAD --source origin/HEAD</code>.</p>
+<h2 id="managing-ci-caches">    Managing CI Caches <small><a href="#managing-ci-caches">¶</a></small></h2> <p><code>pre-commit</code> by default places its repository store in <code>~/.cache/pre-commit</code>
+-- this can be configured in two ways:</p>
+<ul>
+<li><code>PRE_COMMIT_HOME</code>: if set, pre-commit will use that location instead.</li>
+<li><code>XDG_CACHE_HOME</code>: if set, pre-commit will use <code>$XDG_CACHE_HOME/pre-commit</code>
+following the <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a>.</li>
+</ul>
+<h3 id="travis-ci-example">    travis-ci example <small><a href="#travis-ci-example">¶</a></small></h3> <div class="highlight yaml"><pre><span></span><span class="nt">cache</span><span class="p">:</span>
+  <span class="nt">directories</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$HOME/.cache/pre-commit</span>
+</pre></div>
+<h3 id="appveyor-example">    appveyor example <small><a href="#appveyor-example">¶</a></small></h3> <div class="highlight yaml"><pre><span></span><span class="nt">cache</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="s">&#39;%USERPROFILE%\.cache\pre-commit&#39;</span>
+</pre></div>
+<h3 id="azure-pipelines-example">    azure pipelines example <small><a href="#azure-pipelines-example">¶</a></small></h3> <p>note: azure pipelines uses immutable caches so the python version and
+<code>.pre-commit-config.yaml</code> hash must be included in the cache key.  for a
+repository template, see [asottile@job--pre-commit.yml].</p>
+<div class="highlight yaml"><pre><span></span><span class="nt">jobs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">job</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">precommit</span>
+
+  <span class="c1"># ...</span>
+
+  <span class="nt">variables</span><span class="p">:</span>
+    <span class="nt">PRE_COMMIT_HOME</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$(Pipeline.Workspace)/pre-commit-cache</span>
+
+  <span class="nt">steps</span><span class="p">:</span>
+
+  <span class="c1"># ...</span>
+
+  <span class="p p-Indicator">-</span> <span class="nt">script</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">echo &quot;##vso[task.setvariable variable=PY]$(python -VV)&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CacheBeta@0</span>
+    <span class="nt">inputs</span><span class="p">:</span>
+      <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pre-commit | .pre-commit-config.yaml | &quot;$(PY)&quot;</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$(PRE_COMMIT_HOME)</span>
+</pre></div>
+<h3 id="github-actions-example">    github actions example <small><a href="#github-actions-example">¶</a></small></h3> <p><strong>see the <a href="https://github.com/pre-commit/action">official pre-commit github action</a></strong></p>
+<p>like <a href="#azure-pipelines-example">azure pipelines</a>, github actions also uses
+immutable caches:</p>
+<div class="highlight yaml"><pre><span></span>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">set PY</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">echo &quot;::set-env name=PY::$(python -VV | sha256sum | cut -d&#39; &#39; -f1)&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/cache@v1</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">~/.cache/pre-commit</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pre-commit|${{ env.PY }}|${{ hashFiles(&#39;.pre-commit-config.yaml&#39;) }}</span>
+</pre></div>
 <h2 id="usage-with-tox">    Usage with tox <small><a href="#usage-with-tox">¶</a></small></h2> <p><a href="https://tox.readthedocs.io/">tox</a> is useful for configuring test / CI tools
 such as pre-commit.  One feature of <code>tox&gt;=2</code> is it will clear environment
 variables such that tests are more reproducible.  Under some conditions,
@@ -1027,18 +1131,16 @@ whitelisted.</p>
 <p>When cloning repos over ssh (<code>repo: git@github.com:...</code>), <code>git</code> requires the
 <code>SSH_AUTH_SOCK</code> variable and will otherwise fail:</p>
 <div class="highlight pre-commit"><pre><span></span>[INFO] Initializing environment for git@github.com:pre-commit/pre-commit-hooks.
-An unexpected error has occurred: CalledProcessError: Command: (&#39;/usr/bin/git&#39;, &#39;clone&#39;, &#39;--no-checkout&#39;, &#39;git@github.com:pre-commit/pre-commit-hooks&#39;, &#39;/home/asottile/.cache/pre-commit/repofdkwkq_v&#39;)
-Return code: 128
-Expected return code: 0
-Output: (none)
-Errors:
-    Cloning into &#39;/home/asottile/.cache/pre-commit/repofdkwkq_v&#39;...
-    Permission denied (publickey).
+An unexpected error has occurred: CalledProcessError: command: (&#39;/usr/bin/git&#39;, &#39;fetch&#39;, &#39;origin&#39;, &#39;--tags&#39;)
+return code: 128
+expected return code: 0
+stdout: (none)
+stderr:
+    git@github.com: Permission denied (publickey).
     fatal: Could not read from remote repository.
 
     Please make sure you have the correct access rights
     and the repository exists.
-
 
 Check the log at /home/asottile/.cache/pre-commit/pre-commit.log
 </pre></div>
@@ -1069,7 +1171,7 @@ automatically).</p>
         </div>
 
         <div id="contributing">
-            <div class="page-header"><h1>Contributing</h1></div>
+            <div class="page-header"><h1 id="contributing">    Contributing <small><a href="#contributing">¶</a></small></h1> </div>
 
 <p>We’re looking to grow the project and get more contributors especially to
 support more languages/versions. We’d also like to get the

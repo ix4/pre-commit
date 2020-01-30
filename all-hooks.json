@@ -378,7 +378,7 @@
             "args": [],
             "require_serial": false,
             "additional_dependencies": [
-                "eslint@6.5.1"
+                "eslint@7.0.0-alpha.0"
             ]
         }
     ],
@@ -420,8 +420,9 @@
                 "javascript"
             ],
             "args": [],
+            "require_serial": false,
             "additional_dependencies": [
-                "jshint@2.10.2"
+                "jshint@2.11.0"
             ]
         }
     ],
@@ -450,20 +451,6 @@
             "language": "ruby",
             "types": [
                 "puppet"
-            ],
-            "args": [],
-            "require_serial": false,
-            "additional_dependencies": []
-        }
-    ],
-    "https://github.com/pre-commit/mirrors-pylint": [
-        {
-            "id": "pylint",
-            "name": "pylint",
-            "entry": "pylint",
-            "language": "python",
-            "types": [
-                "python"
             ],
             "args": [],
             "require_serial": false,
@@ -529,7 +516,7 @@
             "name": "check for not-real mock methods",
             "description": "Prevent common mistakes of `assert mck.not_called()`, `assert mck.called_once_with(...)` and `mck.assert_called`.",
             "language": "pygrep",
-            "entry": "(?x)(\n    assert .*\\.(\n        not_called|\n        called_\n    )|\n    \\.assert_(\n        any_call|\n        called|\n        called_once|\n        called_once_with|\n        called_with|\n        has_calls|\n        not_called\n    )($|[^(\\w])\n)\n",
+            "entry": "(?x)(\n    assert .*\\.(\n        not_called|\n        called_\n    )|\n    # ''.join(rf'(?<!\\b{s})' for s in dir(mock) if s.endswith('Mock')))\n    (?<!\\bAsyncMock)(?<!\\bMagicMock)(?<!\\bMock)(?<!\\bNonCallableMagicMock)(?<!\\bNonCallableMock)(?<!\\bPropertyMock)\n    \\.assert_(\n        any_call|\n        called|\n        called_once|\n        called_once_with|\n        called_with|\n        has_calls|\n        not_called\n    )($|[^(\\w])\n)\n",
             "types": [
                 "python"
             ]
@@ -568,7 +555,7 @@
             "id": "rst-backticks",
             "name": "rst ``code`` is two backticks",
             "description": "Detect common mistake of using single backticks when writing rst",
-            "entry": " `[^`]+[^_]`([^_]|$)",
+            "entry": "(^| )`[^`]+[^_]`([^_]|$)",
             "language": "pygrep",
             "types": [
                 "rst"
@@ -686,7 +673,7 @@
             "entry": "blacken-docs",
             "language": "python",
             "language_version": "python3",
-            "files": "\\.(rst|md|markdown)$"
+            "files": "\\.(rst|md|markdown|py|tex)$"
         }
     ],
     "https://github.com/asottile/dead": [
@@ -695,6 +682,7 @@
             "name": "detect dead code",
             "description": "dead simple python dead code detection",
             "entry": "dead",
+            "pass_filenames": false,
             "language": "python",
             "language_version": "python3",
             "types": [
@@ -1131,7 +1119,7 @@
             "name": "Dockerfile linter",
             "entry": "dockerfile_lint",
             "args": [
-                "-f"
+                "--dockerfile"
             ],
             "language": "node",
             "additional_dependencies": [
@@ -1247,6 +1235,72 @@
             ],
             "language": "golang",
             "pass_filenames": false
+        }
+    ],
+    "https://github.com/Bahjat/pre-commit-golang": [
+        {
+            "id": "go-fmt-import",
+            "name": "go import/fmt",
+            "entry": "run-go-fmt-import.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `goimport,gofmt`, requires golang"
+        },
+        {
+            "id": "go-vet",
+            "name": "go vet",
+            "entry": "run-go-vet.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `go vet`, requires golang"
+        },
+        {
+            "id": "go-lint",
+            "name": "golint",
+            "entry": "run-go-lint.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `go lint`, requires golang"
+        },
+        {
+            "id": "go-unit-tests",
+            "name": "go unit test",
+            "entry": "run-go-unit-tests.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `go test`, requires golang"
+        },
+        {
+            "id": "gofumpt",
+            "name": "gofumpt",
+            "entry": "run-go-gofumpt.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `gofumpt`, requires github.com/mvdan/gofumpt"
+        },
+        {
+            "id": "go-err-check",
+            "name": "go errcheck",
+            "entry": "run-go-err-check.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `errcheck`, requires github.com/kisielk/errcheck"
+        },
+        {
+            "id": "go-static-check",
+            "name": "go staticcheck",
+            "entry": "run-go-static-check.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `staticcheck`, install https://staticcheck.io/docs/"
+        },
+        {
+            "id": "golangci-lint",
+            "name": "go golangci-lint",
+            "entry": "run-golangci-lint.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `golangci-lint`, install https://github.com/golangci/golangci-lint"
         }
     ],
     "https://github.com/dnephin/pre-commit-golang": [
@@ -1521,9 +1575,10 @@
             "id": "ansible-lint",
             "name": "Ansible-lint",
             "description": "This hook runs ansible-lint.",
-            "entry": "ansible-lint",
+            "entry": "ansible-lint --force-color .",
             "language": "python",
-            "files": "\\.(yaml|yml)$"
+            "pass_filenames": false,
+            "always_run": true
         }
     ],
     "https://github.com/doublify/pre-commit-clang-format": [
@@ -1531,12 +1586,11 @@
             "id": "clang-format",
             "name": "clang-format",
             "description": "Format files with ClangFormat.",
-            "entry": "clang-format",
+            "entry": "clang-format -i",
             "language": "system",
-            "files": "\\.(c|cc|cxx|cpp|frag|glsl|h|hpp|hxx|ih|ispc|ipp|java|js|m|proto|vert)$",
+            "files": "\\.(c|cc|cxx|cpp|frag|glsl|h|hpp|hxx|ih|ispc|ipp|java|js|m|mm|proto|vert)$",
             "args": [
-                "-fallback-style=none",
-                "-i"
+                "-fallback-style=none"
             ]
         }
     ],
@@ -1814,6 +1868,19 @@
             "verbose": true
         },
         {
+            "id": "cookstyle",
+            "name": "Enforce Chef style guide with cookstyle",
+            "description": "Enforce Chef style guide with cookstyle",
+            "entry": "bin/cookstyle-wrapper.rb",
+            "language": "script",
+            "pass_filenames": true,
+            "types": [
+                "ruby"
+            ],
+            "verbose": true,
+            "require_serial": true
+        },
+        {
             "id": "chef-cookbook-version",
             "name": "Ensure Chef cookbook version bump",
             "description": "Ensure Chef cookbook versions are bumped when contents are changed",
@@ -1997,6 +2064,17 @@
             ]
         }
     ],
+    "https://github.com/PyCQA/pylint": [
+        {
+            "id": "pylint",
+            "name": "pylint",
+            "entry": "pylint",
+            "language": "python",
+            "types": [
+                "python"
+            ]
+        }
+    ],
     "https://github.com/miki725/importanize": [
         {
             "id": "importanize",
@@ -2007,6 +2085,10 @@
             "language_version": "python3",
             "types": [
                 "python"
+            ],
+            "args": [
+                "-v",
+                "--no-auto-pipe"
             ]
         }
     ],
@@ -2085,6 +2167,15 @@
             "types": [
                 "text"
             ]
+        },
+        {
+            "id": "check-git-config-email",
+            "name": "Check Git Config Email",
+            "description": "This hook checks to ensure the Git config email matches one of the specified domains.",
+            "entry": "check-git-config-email",
+            "language": "python",
+            "pass_filenames": false,
+            "always_run": true
         },
         {
             "id": "check-jamf-extension-attributes",
@@ -2521,8 +2612,7 @@
             "description": "run roxygen2::roxygenize()",
             "entry": "inst/bin/roxygenize",
             "language": "script",
-            "files": "^(R/|man/)",
-            "pass_filenames": false
+            "files": "^(R|man)/"
         },
         {
             "id": "use-tidy-description",
@@ -2563,6 +2653,14 @@
             "entry": "inst/bin/readme-rmd-rendered",
             "language": "script",
             "files": "README\\.[Rr]?md$"
+        },
+        {
+            "id": "codemeta-description-updated",
+            "name": "codemeta-description-updated",
+            "description": "make sure codemeta.json is in sync with DESCRIPTION",
+            "entry": "inst/bin/codemeta-description-updated",
+            "language": "script",
+            "files": "^DESCRIPTION$"
         },
         {
             "id": "spell-check",
@@ -2621,6 +2719,14 @@
             "files": "\\.go$",
             "language": "script",
             "description": "Runs `golangci-lint`, requires golangci-lint"
+        },
+        {
+            "id": "golangci-lint-conf",
+            "name": "golangci-lint-conf",
+            "entry": "run-golangci-lint-conf.sh",
+            "files": "\\.go$",
+            "language": "script",
+            "description": "Runs `golangci-lint` read local config file, requires golangci-lint"
         }
     ],
     "https://gitlab.com/daverona-env/pre-commit-cpp": [
@@ -2695,7 +2801,7 @@
             "description": "Formats CMake list files.",
             "entry": "cmake-format",
             "language": "python",
-            "files": "^(CMakeLists.*|.*\\.cmake|.*\\.cmake.in)$",
+            "files": "(CMakeLists.*|.*\\.cmake|.*\\.cmake.in)$",
             "args": [
                 "-i"
             ],
@@ -2739,6 +2845,392 @@
             "types": [
                 "vim"
             ]
+        }
+    ],
+    "https://github.com/eschulte/lisp-format": [
+        {
+            "id": "lisp-format",
+            "name": "formatter of lisp code",
+            "description": "Run lisp-format against lisp files",
+            "language": "system",
+            "files": "\\.(lisp|cl|asd|scm|el)$",
+            "entry": "lisp-format -i"
+        }
+    ],
+    "https://github.com/ryanrhee/shellcheck-py": [
+        {
+            "id": "shellcheck",
+            "name": "shellcheck",
+            "description": "Test shell scripts with shellcheck",
+            "entry": "shellcheck",
+            "language": "python",
+            "types": [
+                "shell"
+            ],
+            "require_serial": true
+        }
+    ],
+    "https://github.com/APIDevTools/swagger-cli": [
+        {
+            "id": "swagger-validation",
+            "name": "swagger-validation",
+            "entry": "swagger-cli",
+            "description": "Hook to validate swagger specs.",
+            "language": "node",
+            "files": "(openapi|swagger).*\\.(json|ya?ml)$",
+            "args": [
+                "validate"
+            ]
+        }
+    ],
+    "https://github.com/kynan/nbstripout": [
+        {
+            "id": "nbstripout",
+            "name": "nbstripout",
+            "description": "nbstripout: strip output from Jupyter and IPython notebooks",
+            "entry": "nbstripout",
+            "language": "python",
+            "files": "\\.ipynb$"
+        }
+    ],
+    "https://gitlab.com/devopshq/gitlab-ci-linter": [
+        {
+            "id": "gitlab-ci-linter",
+            "name": ".gitlab-ci.yml linter",
+            "description": "Validates .gitlab-ci.yml file (pure-python version without dependencies)",
+            "entry": "gitlab-ci-linter",
+            "language": "python",
+            "language_version": "python3",
+            "pass_filenames": false,
+            "files": ".gitlab-ci.yml"
+        }
+    ],
+    "https://github.com/bmorcos/pre-commit-hooks-cpp": [
+        {
+            "id": "clang-format",
+            "name": "clang-format",
+            "description": "Format C code using clang-format.",
+            "language": "system",
+            "files": "\\.(c|cc|cxx|cpp|h|hpp|hxx)$",
+            "entry": "clang-format -i",
+            "args": [
+                "-style=Google"
+            ]
+        },
+        {
+            "id": "cpplint",
+            "name": "cpplint",
+            "description": "Check style of C code using cpplint.",
+            "language": "python",
+            "files": "\\.(c|cc|cxx|cpp|h|hpp|hxx)$",
+            "entry": "cpplint",
+            "args": [
+                "--verbose=3"
+            ]
+        },
+        {
+            "id": "cppcheck",
+            "name": "cppcheck",
+            "description": "Check correctness of C code using cppcheck.",
+            "language": "system",
+            "files": "\\.(c|cc|cxx|cpp|h|hpp|hxx)$",
+            "entry": "cppcheck --error-exitcode=1",
+            "args": [
+                "--enable=warning"
+            ]
+        }
+    ],
+    "https://github.com/igorshubovych/markdownlint-cli": [
+        {
+            "id": "markdownlint",
+            "name": "markdownlint",
+            "description": "Checks the style of Markdown/Commonmark files.",
+            "entry": "markdownlint",
+            "language": "node",
+            "types": [
+                "markdown"
+            ],
+            "minimum_pre_commit_version": "0.15.0"
+        }
+    ],
+    "https://github.com/TekWizely/pre-commit-golang": [
+        {
+            "id": "go-build-mod",
+            "name": "go-build-mod",
+            "entry": "go-build-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root $FILE); go build -o /dev/null [$ARGS] ./...' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "go-build-pkg",
+            "name": "go-build-pkg",
+            "entry": "go-build-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go build -o /dev/null [$ARGS] ./$(dirname $FILE)' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "go-build-repo-mod",
+            "name": "go-build-repo-mod",
+            "entry": "go-build-repo-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root); go build -o /dev/null [$ARGS] ./...' for each module in the repo",
+            "pass_filenames": false
+        },
+        {
+            "id": "go-build-repo-pkg",
+            "name": "go-build-repo-pkg",
+            "entry": "go-build-repo-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go build -o /dev/null [$ARGS] ./...' in repo root folder",
+            "pass_filenames": false
+        },
+        {
+            "id": "go-critic",
+            "name": "go-critic",
+            "entry": "go-critic.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'gocritic check [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        },
+        {
+            "id": "go-fmt",
+            "name": "go-fmt",
+            "entry": "go-fmt.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'gofmt -l -d [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        },
+        {
+            "id": "go-imports",
+            "name": "go-imports",
+            "entry": "go-imports.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'goimports -l -d [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        },
+        {
+            "id": "go-lint",
+            "name": "go-lint",
+            "entry": "go-lint.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'golint -set_exit_status [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        },
+        {
+            "id": "go-returns",
+            "name": "go-returns",
+            "entry": "go-returns.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'goreturns -l -d [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        },
+        {
+            "id": "go-test-mod",
+            "name": "go-test-mod",
+            "entry": "go-test-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root $FILE); go test [$ARGS] ./...' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "go-test-pkg",
+            "name": "go-test-pkg",
+            "entry": "go-test-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go test [$ARGS] ./$(dirname $FILE)' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "go-test-repo-mod",
+            "name": "go-test-repo-mod",
+            "entry": "go-test-repo-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root); go test [$ARGS] ./...' for each module in the repo",
+            "pass_filenames": false
+        },
+        {
+            "id": "go-test-repo-pkg",
+            "name": "go-test-repo-pkg",
+            "entry": "go-test-repo-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go test [$ARGS] ./...' in repo root folder",
+            "pass_filenames": false
+        },
+        {
+            "id": "go-vet-mod",
+            "name": "go-vet-mod",
+            "entry": "go-vet-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root $FILE); go vet [$ARGS] ./...' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "go-vet-pkg",
+            "name": "go-vet-pkg",
+            "entry": "go-vet-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go vet [$ARGS] ./$(dirname $FILE)' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "go-vet-repo-mod",
+            "name": "go-vet-repo-mod",
+            "entry": "go-vet-repo-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root); go vet [$ARGS] ./...' for each module in the repo",
+            "pass_filenames": false
+        },
+        {
+            "id": "go-vet-repo-pkg",
+            "name": "go-vet-repo-pkg",
+            "entry": "go-vet-repo-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go vet [$ARGS] ./...' in repo root folder",
+            "pass_filenames": false
+        },
+        {
+            "id": "go-vet",
+            "name": "go-vet",
+            "entry": "go-vet.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'go vet [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        },
+        {
+            "id": "golangci-lint-mod",
+            "name": "golangci-lint-mod",
+            "entry": "golangci-lint-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root $FILE); golangci-lint run [$ARGS] ./...' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "golangci-lint-pkg",
+            "name": "golangci-lint-pkg",
+            "entry": "golangci-lint-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'golangci-lint run [$ARGS] ./$(dirname $FILE)' for each staged .go file",
+            "pass_filenames": true,
+            "require_serial": true
+        },
+        {
+            "id": "golangci-lint-repo-mod",
+            "name": "golangci-lint-repo-mod",
+            "entry": "golangci-lint-repo-mod.sh",
+            "files": "(\\.go$)|(\\bgo\\.mod$)",
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'cd $(mod_root); golangci-lint run [$ARGS] ./...' for each module in the repo",
+            "pass_filenames": false
+        },
+        {
+            "id": "golangci-lint-repo-pkg",
+            "name": "golangci-lint-repo-pkg",
+            "entry": "golangci-lint-repo-pkg.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'golangci-lint run [$ARGS] ./...' in repo root folder",
+            "pass_filenames": false
+        },
+        {
+            "id": "golangci-lint",
+            "name": "golangci-lint",
+            "entry": "golangci-lint.sh",
+            "types": [
+                "go"
+            ],
+            "exclude": "(^|/)vendor/",
+            "language": "script",
+            "description": "Run 'golangci-lint run [$ARGS] $FILE' for each staged .go file",
+            "pass_filenames": true
+        }
+    ],
+    "https://github.com/markdownlint/markdownlint": [
+        {
+            "id": "markdownlint",
+            "name": "Markdownlint",
+            "description": "Run markdownlint on your Markdown files",
+            "entry": "mdl",
+            "language": "ruby",
+            "files": "\\.(md|mdown|markdown)$"
         }
     ]
 }

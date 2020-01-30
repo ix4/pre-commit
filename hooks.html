@@ -290,16 +290,6 @@ Also available in <a href="/all-hooks.json">json</a>.
             </li>
     </ul>
     <h3>
-        <a href="https://github.com/pre-commit/mirrors-pylint" target="_blank">
-            github.com/pre-commit/mirrors-pylint
-        </a>
-    </h3>
-    <ul>
-            <li>
-                <code>pylint</code>
-            </li>
-    </ul>
-    <h3>
         <a href="https://github.com/pre-commit/mirrors-ruby-lint" target="_blank">
             github.com/pre-commit/mirrors-ruby-lint
         </a>
@@ -793,6 +783,45 @@ Also available in <a href="/all-hooks.json">json</a>.
             </li>
     </ul>
     <h3>
+        <a href="https://github.com/Bahjat/pre-commit-golang" target="_blank">
+            github.com/Bahjat/pre-commit-golang
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>go-fmt-import</code>
+                    - Runs `goimport,gofmt`, requires golang
+            </li>
+            <li>
+                <code>go-vet</code>
+                    - Runs `go vet`, requires golang
+            </li>
+            <li>
+                <code>go-lint</code>
+                    - Runs `go lint`, requires golang
+            </li>
+            <li>
+                <code>go-unit-tests</code>
+                    - Runs `go test`, requires golang
+            </li>
+            <li>
+                <code>gofumpt</code>
+                    - Runs `gofumpt`, requires github.com/mvdan/gofumpt
+            </li>
+            <li>
+                <code>go-err-check</code>
+                    - Runs `errcheck`, requires github.com/kisielk/errcheck
+            </li>
+            <li>
+                <code>go-static-check</code>
+                    - Runs `staticcheck`, install https://staticcheck.io/docs/
+            </li>
+            <li>
+                <code>golangci-lint</code>
+                    - Runs `golangci-lint`, install https://github.com/golangci/golangci-lint
+            </li>
+    </ul>
+    <h3>
         <a href="https://github.com/dnephin/pre-commit-golang" target="_blank">
             github.com/dnephin/pre-commit-golang
         </a>
@@ -1193,6 +1222,10 @@ https://pypi.python.org/pypi/beautysh
                     - Enforce Chef style guide with foodcritic
             </li>
             <li>
+                <code>cookstyle</code>
+                    - Enforce Chef style guide with cookstyle
+            </li>
+            <li>
                 <code>chef-cookbook-version</code>
                     - Ensure Chef cookbook versions are bumped when contents are changed
             </li>
@@ -1342,6 +1375,16 @@ https://pypi.python.org/pypi/beautysh
             </li>
     </ul>
     <h3>
+        <a href="https://github.com/PyCQA/pylint" target="_blank">
+            github.com/PyCQA/pylint
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>pylint</code>
+            </li>
+    </ul>
+    <h3>
         <a href="https://github.com/miki725/importanize" target="_blank">
             github.com/miki725/importanize
         </a>
@@ -1409,6 +1452,10 @@ https://pypi.python.org/pypi/beautysh
             <li>
                 <code>check-autopkg-recipes</code>
                     - This hook checks AutoPkg recipes to ensure they contain required top-level keys.
+            </li>
+            <li>
+                <code>check-git-config-email</code>
+                    - This hook checks to ensure the Git config email matches one of the specified domains.
             </li>
             <li>
                 <code>check-jamf-extension-attributes</code>
@@ -1669,6 +1716,10 @@ https://pypi.python.org/pypi/beautysh
                     - make sure README.Rmd hasn&#39;t been edited more recently than README.md
             </li>
             <li>
+                <code>codemeta-description-updated</code>
+                    - make sure codemeta.json is in sync with DESCRIPTION
+            </li>
+            <li>
                 <code>spell-check</code>
                     - perform a spell check with spelling::spell_check_files()
             </li>
@@ -1702,6 +1753,10 @@ https://pypi.python.org/pypi/beautysh
             <li>
                 <code>golangci-lint</code>
                     - Runs `golangci-lint`, requires golangci-lint
+            </li>
+            <li>
+                <code>golangci-lint-conf</code>
+                    - Runs `golangci-lint` read local config file, requires golangci-lint
             </li>
     </ul>
     <h3>
@@ -1797,6 +1852,201 @@ https://pypi.python.org/pypi/beautysh
             <li>
                 <code>vint</code>
                     - Lints all vim files
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/eschulte/lisp-format" target="_blank">
+            github.com/eschulte/lisp-format
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>lisp-format</code>
+                    - Run lisp-format against lisp files
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/ryanrhee/shellcheck-py" target="_blank">
+            github.com/ryanrhee/shellcheck-py
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>shellcheck</code>
+                    - Test shell scripts with shellcheck
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/APIDevTools/swagger-cli" target="_blank">
+            github.com/APIDevTools/swagger-cli
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>swagger-validation</code>
+                    - Hook to validate swagger specs.
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/kynan/nbstripout" target="_blank">
+            github.com/kynan/nbstripout
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>nbstripout</code>
+                    - nbstripout: strip output from Jupyter and IPython notebooks
+            </li>
+    </ul>
+    <h3>
+        <a href="https://gitlab.com/devopshq/gitlab-ci-linter" target="_blank">
+            gitlab.com/devopshq/gitlab-ci-linter
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>gitlab-ci-linter</code>
+                    - Validates .gitlab-ci.yml file (pure-python version without dependencies)
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/bmorcos/pre-commit-hooks-cpp" target="_blank">
+            github.com/bmorcos/pre-commit-hooks-cpp
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>clang-format</code>
+                    - Format C code using clang-format.
+            </li>
+            <li>
+                <code>cpplint</code>
+                    - Check style of C code using cpplint.
+            </li>
+            <li>
+                <code>cppcheck</code>
+                    - Check correctness of C code using cppcheck.
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/igorshubovych/markdownlint-cli" target="_blank">
+            github.com/igorshubovych/markdownlint-cli
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>markdownlint</code>
+                    - Checks the style of Markdown/Commonmark files.
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/TekWizely/pre-commit-golang" target="_blank">
+            github.com/TekWizely/pre-commit-golang
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>go-build-mod</code>
+                    - Run &#39;cd $(mod_root $FILE); go build -o /dev/null [$ARGS] ./...&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-build-pkg</code>
+                    - Run &#39;go build -o /dev/null [$ARGS] ./$(dirname $FILE)&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-build-repo-mod</code>
+                    - Run &#39;cd $(mod_root); go build -o /dev/null [$ARGS] ./...&#39; for each module in the repo
+            </li>
+            <li>
+                <code>go-build-repo-pkg</code>
+                    - Run &#39;go build -o /dev/null [$ARGS] ./...&#39; in repo root folder
+            </li>
+            <li>
+                <code>go-critic</code>
+                    - Run &#39;gocritic check [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-fmt</code>
+                    - Run &#39;gofmt -l -d [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-imports</code>
+                    - Run &#39;goimports -l -d [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-lint</code>
+                    - Run &#39;golint -set_exit_status [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-returns</code>
+                    - Run &#39;goreturns -l -d [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-test-mod</code>
+                    - Run &#39;cd $(mod_root $FILE); go test [$ARGS] ./...&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-test-pkg</code>
+                    - Run &#39;go test [$ARGS] ./$(dirname $FILE)&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-test-repo-mod</code>
+                    - Run &#39;cd $(mod_root); go test [$ARGS] ./...&#39; for each module in the repo
+            </li>
+            <li>
+                <code>go-test-repo-pkg</code>
+                    - Run &#39;go test [$ARGS] ./...&#39; in repo root folder
+            </li>
+            <li>
+                <code>go-vet-mod</code>
+                    - Run &#39;cd $(mod_root $FILE); go vet [$ARGS] ./...&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-vet-pkg</code>
+                    - Run &#39;go vet [$ARGS] ./$(dirname $FILE)&#39; for each staged .go file
+            </li>
+            <li>
+                <code>go-vet-repo-mod</code>
+                    - Run &#39;cd $(mod_root); go vet [$ARGS] ./...&#39; for each module in the repo
+            </li>
+            <li>
+                <code>go-vet-repo-pkg</code>
+                    - Run &#39;go vet [$ARGS] ./...&#39; in repo root folder
+            </li>
+            <li>
+                <code>go-vet</code>
+                    - Run &#39;go vet [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+            <li>
+                <code>golangci-lint-mod</code>
+                    - Run &#39;cd $(mod_root $FILE); golangci-lint run [$ARGS] ./...&#39; for each staged .go file
+            </li>
+            <li>
+                <code>golangci-lint-pkg</code>
+                    - Run &#39;golangci-lint run [$ARGS] ./$(dirname $FILE)&#39; for each staged .go file
+            </li>
+            <li>
+                <code>golangci-lint-repo-mod</code>
+                    - Run &#39;cd $(mod_root); golangci-lint run [$ARGS] ./...&#39; for each module in the repo
+            </li>
+            <li>
+                <code>golangci-lint-repo-pkg</code>
+                    - Run &#39;golangci-lint run [$ARGS] ./...&#39; in repo root folder
+            </li>
+            <li>
+                <code>golangci-lint</code>
+                    - Run &#39;golangci-lint run [$ARGS] $FILE&#39; for each staged .go file
+            </li>
+    </ul>
+    <h3>
+        <a href="https://github.com/markdownlint/markdownlint" target="_blank">
+            github.com/markdownlint/markdownlint
+        </a>
+    </h3>
+    <ul>
+            <li>
+                <code>markdownlint</code>
+                    - Run markdownlint on your Markdown files
             </li>
     </ul>
 

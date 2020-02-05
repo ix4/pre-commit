@@ -238,7 +238,7 @@
         },
         {
             "id": "flake8",
-            "name": "Flake8",
+            "name": "Flake8 (deprecated, use gitlab.com/pycqa/flake8)",
             "description": "This hook runs flake8.",
             "entry": "flake8",
             "language": "python",
@@ -2729,7 +2729,7 @@
             "description": "Runs `golangci-lint` read local config file, requires golangci-lint"
         }
     ],
-    "https://gitlab.com/daverona-env/pre-commit-cpp": [
+    "https://gitlab.com/toscana/pre-commit-cpp": [
         {
             "id": "clang-format",
             "name": "formatter of C/C++ code",

@@ -3447,7 +3447,6 @@
             "exclude": "\\.terraform\\/.*$",
             "always_run": false,
             "pass_filenames": false,
-            "verbose": true,
             "additional_dependencies": [
                 "checkov"
             ]
@@ -3462,8 +3461,7 @@
             "files": "(\\.tf)$",
             "exclude": "\\.terraform\\/.*$",
             "always_run": false,
-            "pass_filenames": false,
-            "verbose": true
+            "pass_filenames": false
         }
     ],
     "https://github.com/lietu/go-pre-commit": [
@@ -3645,11 +3643,24 @@
             "files": ".*"
         },
         {
-            "id": "clang-format",
-            "name": "clang-format",
+            "id": "clang-format-diff",
+            "name": "clang-format-diff",
             "entry": "clang_format.py",
             "language": "script",
+            "args": [
+                "--diff"
+            ],
             "require_serial": true
+        },
+        {
+            "id": "clang-format-whole-file",
+            "name": "clang-format-whole-file",
+            "entry": "clang_format.py",
+            "language": "script",
+            "args": [
+                "--whole-file"
+            ],
+            "require_serial": false
         }
     ],
     "https://github.com/jazzband/pip-tools": [

@@ -2821,7 +2821,7 @@
     "https://gitlab.com/daverona/pre-commit-cpp": [
         {
             "id": "clang-format",
-            "name": "formatter of C/C++ code",
+            "name": "clang-format",
             "description": "Run clang-format against C/C++ header and source files",
             "language": "system",
             "files": "\\.(h\\+\\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\\+\\+|cxx|tpp|txx)$",
@@ -2832,7 +2832,7 @@
         },
         {
             "id": "cpplint",
-            "name": "linter for Google C++ Style Guide",
+            "name": "cpplint",
             "description": "Run cpplint against C/C++ header and source files",
             "language": "python",
             "files": "\\.(h\\+\\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\\+\\+|cxx|tpp|txx)$",
@@ -2840,7 +2840,7 @@
         },
         {
             "id": "cppcheck",
-            "name": "static analyzer of C/C++ code",
+            "name": "cppcheck",
             "description": "Run cppcheck against C/C++ source files",
             "language": "system",
             "files": "\\.(c|cc|cpp|cu|c\\+\\+|cxx|tpp|txx)$",
@@ -2848,7 +2848,7 @@
         },
         {
             "id": "docker-clang-format",
-            "name": "formatter of C/C++ code",
+            "name": "clang-format",
             "description": "Run clang-format against C/C++ header and source files in Docker container",
             "language": "docker_image",
             "files": "\\.(h\\+\\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\\+\\+|cxx|tpp|txx)$",
@@ -2859,7 +2859,7 @@
         },
         {
             "id": "docker-cpplint",
-            "name": "linter for Google C++ Style Guide",
+            "name": "cpplint",
             "description": "Run cpplint against C/C++ header and source files in Docker container",
             "language": "python",
             "files": "\\.(h\\+\\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\\+\\+|cxx|tpp|txx)$",
@@ -2867,7 +2867,7 @@
         },
         {
             "id": "docker-cppcheck",
-            "name": "static analyzer of C/C++ code",
+            "name": "cppcheck",
             "description": "Run cppcheck against C/C++ source files in Docker container",
             "language": "docker_image",
             "files": "\\.(c|cc|cpp|cu|c\\+\\+|cxx|tpp|txx)$",
